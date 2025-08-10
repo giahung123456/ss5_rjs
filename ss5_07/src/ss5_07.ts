@@ -1,9 +1,17 @@
 class Book {
+    private _id:number
     private _title  :string
     private _author:string
-    constructor(_title:string,_author:string){
+    constructor(_id:number,_title:string,_author:string){
+        this._id=_id
         this._author=_author
         this._title=_title
+    }
+    get id(){
+        return this._id
+    }
+    set id(idValue:number){
+        this._id=idValue
     }
     get title(){
         return this._title
@@ -29,23 +37,39 @@ class Library {
         this._books.push(bookValue)
 
     }
-    hienThi(){
+    display(){
         console.log(this._books);
+        
+    }
+    timKiem(idSua:number,titleEdit:string,authorEdit:string){
+
+       let newBook:Book[]= this._books.filter((b)=>b.id===idSua)
+       
+        if(newBook[0]){
+            newBook[0].title=titleEdit
+            newBook[0].author=authorEdit
+        }
+       
+        
         
     }
 
 }
 let book:Book[]=[]
 let library=new Library(book)
-let book1=new Book(`a`,`b`)
+let book1=new Book(1,`a`,`b`)
 library.add(book1)
-let book2=new Book(`c`,`d`)
+let book2=new Book(2,`c`,`d`)
 library.add(book2)
-let book3=new Book(`e`,`f`)
+let book3=new Book(3,`e`,`f`)
 library.add(book3)
-let book4=new Book(`g`,`h`)
+let book4=new Book(4,`g`,`h`)
 library.add(book4)
-let book5=new Book(`i`,`k`)
+let book5=new Book(5,`i`,`k`)
 library.add(book5)
-library.hienThi()
 
+library.timKiem(2,`o`,`p`)
+
+
+
+library.display()
